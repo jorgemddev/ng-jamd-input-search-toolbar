@@ -1,0 +1,136 @@
+
+<div [formGroup]="form">
+    <div class="input-group mb-3">
+      <label
+        *ngIf="toolbar?.filterLabel && !hideFilter"
+        class="input-group-text"
+        for="filter"
+        >{{ toolbar?.filterLabel }}</label
+      >
+      <span *ngIf="!hideFilter" class="input-group-text"><i class="fa-solid fa-filter"></i></span>
+      <select
+        *ngIf="!hideFilter"
+        class="form-control"
+        id="filter"
+        #filter
+        formControlName="select"
+        (change)="filterSelect()"
+      >
+        <option value="-1">SELECCIONE</option>
+        <option *ngFor="let item of filters" value="{{ item.id }}">
+          {{ item.tag | uppercase }}
+        </option>
+      </select>
+      <span *ngIf="!hideSearch" class="input-group-text"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></span>
+      <input
+        *ngIf="!hideSearch"
+        #vs
+        formControlName="input"
+        type="search"
+        [placeholder]="placeholder"
+        class="form-control"
+        id="search"
+        name="search"
+        (keyup)="search(vs.value)"
+      (search)="onSearchClear(vs)"
+      />
+      <!--Buttons-->
+  
+    <button *ngIf="toBack" class="btn btn-outline-secondary" (click)="goBack()"><i class="fa-solid fa-arrow-left"></i></button>
+      <button
+        *ngFor="let button of toolbar?.buttons"
+        (click)="onClickBtnTb(button)"
+        class="btn btn-outline-secondary"
+        type="button"
+        id="{{ button?.id }}"
+      >
+        <i
+          *ngIf="button?.iconFaWSome"
+          class="fa-solid {{button?.iconFaWSome}}"
+        ></i>
+        {{ button?.value }}
+      </button>
+      <!--/Buttons-->
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="items">
+    <div class="col-12">
+      <div class="card card-margin">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table widget-26">
+              <tbody>
+                <tr *ngFor="let item of items">
+                  <td>
+                    <div class="widget-26-job-emp-img">
+                      <img [src]="item.image" />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="widget-26-job-title">
+                      <a href="#">{{ item.name }}</a>
+                      <p class="m-0">
+                        <i class="fa-solid fa-barcode"></i>
+                        {{ item.barcode }}
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="text-muted time"
+                      ><i class="fa-regular fa-calendar"></i> Creado
+                      {{ item.created_at }}</span
+                    >
+                  </td>
+                  <td>
+                    <span class="text-muted time"
+                      ><b>Marca</b> {{ item.brand }} <b>Modelo</b>
+                      {{ item.model }}</span
+                    >
+                  </td>
+                  <td>
+                    <button
+                      *ngIf="toolbar.edit"
+                      type="button"
+                      class="btn text-warning"
+                      (click)="selectedEdit(item)"
+                    >
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </button>
+                    <button
+                      *ngIf="toolbar.delete"
+                      type="button"
+                      class="btn text-danger"
+                      (click)="selectedDelete(item)"
+                    >
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa-solid fa-trash fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </button>
+                    <button
+                      *ngIf="toolbar.view"
+                      type="button"
+                      class="btn text-success"
+                      (click)="selectedItem(item)"
+                    >
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa-solid fa-check fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <nav class="d-flex justify-content-center" *ngIf="totalPage > 0"></nav>
+        </div>
+      </div>
+    </div>
+  </div>
