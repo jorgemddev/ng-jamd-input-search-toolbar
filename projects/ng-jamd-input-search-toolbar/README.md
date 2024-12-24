@@ -44,7 +44,7 @@ export class AppModule { }
 Añade el selector del componente en tu archivo HTML:
 
 ```html
-<lib-ng-jamd-input-search-toolbar
+<ng-jamd-input-search-toolbar
   [toolbar]="{
     edit: true,
     delete: false,
@@ -59,7 +59,7 @@ Añade el selector del componente en tu archivo HTML:
   (onSearch)="onSearch($event)"
   (onFilter)="onFilter($event)"
   (onSearchFilter)="onSearchFilter($event)"
-></lib-ng-jamd-input-search-toolbar>
+></ng-jamd-input-search-toolbar>
 
 ```
 

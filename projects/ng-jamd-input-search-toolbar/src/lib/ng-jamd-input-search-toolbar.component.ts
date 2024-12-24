@@ -4,7 +4,7 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Subject, debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'lib-ng-jamd-input-search-toolbar',
+  selector: 'ng-jamd-input-search-toolbar',
   templateUrl: 'ng-jamd-input-search-toolbar.html',
   styles: [
   ]

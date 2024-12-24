@@ -1,6 +1,6 @@
 {
   "name": "ng-jamd-input-search-toolbar",
-"version": "0.0.7",
+"version": "0.0.8",
   "description": "A reusable Angular input search toolbar component.",
   "author": "Jorge Morales D <proyectos@bedadev.cl>",
   "license": "MIT",
