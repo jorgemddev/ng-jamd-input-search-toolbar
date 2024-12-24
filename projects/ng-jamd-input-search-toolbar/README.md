@@ -1,24 +1,82 @@
 # NgJamdInputSearchToolbar
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+**NgJamdInputSearchToolbar** es una librería Angular que proporciona un componente reutilizable para implementar una barra de búsqueda con filtros. Es ideal para aplicaciones que requieren herramientas rápidas de búsqueda y navegación con múltiples opciones configurables.
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name --project ng-jamd-input-search-toolbar` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-jamd-input-search-toolbar`.
-> Note: Don't forget to add `--project ng-jamd-input-search-toolbar` or else it will be added to the default project in your `angular.json` file. 
+## Características
 
-## Build
+- **Barra de búsqueda interactiva** con entrada de texto y opciones de filtrado.
+- **Integración con formularios reactivos de Angular**.
+- **Eventos personalizables** para manejar búsquedas, selección de filtros y botones personalizados.
+- **Diseño flexible**: Opciones para mostrar/ocultar la barra de búsqueda y los filtros.
 
-Run `ng build ng-jamd-input-search-toolbar` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Publishing
+### Paso 1: Instalación
 
-After building your library with `ng build ng-jamd-input-search-toolbar`, go to the dist folder `cd dist/ng-jamd-input-search-toolbar` and run `npm publish`.
+Instala la librería desde npm ejecutando el siguiente comando:
 
-## Running unit tests
+```sh
+npm install ng-jamd-input-search-toolbar
+```
 
-Run `ng test ng-jamd-input-search-toolbar` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Further help
+### Paso 2: Importa la librería
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+En tu archivo `app.module.ts`, importa el módulo:
+
+```typescript
+import { NgJamdInputSearchToolbarModule } from 'ng-jamd-input-search-toolbar';
+
+@NgModule({
+  imports: [NgJamdInputSearchToolbarModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+---
+
+
+### Paso 3: Usar el componente
+
+Añade el selector del componente en tu archivo HTML:
+
+```html
+<lib-ng-jamd-input-search-toolbar
+  [toolbar]="{
+    edit: true,
+    delete: false,
+    buttons: [{ id: 1, value: 'Nuevo', iconFaWSome: 'fa-solid fa-plus' }]
+  }"
+  [filters]="[
+    { id: 1, tag: 'Nombre' },
+    { id: 2, tag: 'Fecha' }
+  ]"
+  placeholder="Buscar aquí..."
+  [toBack]="true"
+  (onSearch)="onSearch($event)"
+  (onFilter)="onFilter($event)"
+  (onSearchFilter)="onSearchFilter($event)"
+></lib-ng-jamd-input-search-toolbar>
+
+```
+
+Configura tu componente de la siguiente forma:
+
+```typescript
+export class AppComponent {
+  onSearch(term: string) {
+    console.log('Texto de búsqueda:', term);
+  }
+
+  onFilter(filter: number) {
+    console.log('Filtro seleccionado:', filter);
+  }
+
+  onSearchFilter(result: { q: string; filter: number }) {
+    console.log('Búsqueda con filtro:', result);
+  }
+}
+```
